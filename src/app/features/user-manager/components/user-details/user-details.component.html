@@ -1,0 +1,47 @@
+<!-- botonera -->
+<div class="hstack gap-2 bento-box">
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="arrowleft"
+      type="normal"
+      routerLink="/user"
+    >
+    </dx-button>
+  </div>
+  
+  <div class="ms-auto">
+    <dx-button
+      style="border: none;"
+      icon="refresh"
+      type="normal"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="menu"
+      type="normal"
+    >
+    </dx-button>
+  </div>
+</div>
+<!-- botonera END -->
+
+<div class="row bento-box-details" *ngIf="user">
+  <div class="col">
+    <h2>{{ user.firstName + ' ' + user.lastName }}</h2>
+    <ul class="list-group mt-3">
+      <li class="list-group-item"><strong>User ID:</strong> {{ user.applicationUserId }}</li>
+      <li class="list-group-item"><strong>User Name:</strong> {{ user.userName }}</li>
+      <li class="list-group-item"><strong>First Name:</strong> {{ user.firstName }}</li>
+      <li class="list-group-item"><strong>Last Name:</strong> {{ user.lastName }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+      <li class="list-group-item"><strong>Email Verified:</strong> {{ user.isEmailVerified ? 'Yes' : 'No' }}</li>
+      <li class="list-group-item"><strong>Blocked:</strong> {{ user.isBlocked ? 'Yes' : 'No' }}</li>
+      <li class="list-group-item"><strong>Enabled:</strong> {{ user.isEnabled ? 'Yes' : 'No' }}</li>
+    </ul>
+  </div>
+</div>

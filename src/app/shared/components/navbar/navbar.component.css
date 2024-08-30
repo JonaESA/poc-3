@@ -1,0 +1,7 @@
+.dx-icon-custom-style {
+  font-size: 28px;
+}
+
+.hide-dropdown-arrow::after {
+  display: none !important;
+}

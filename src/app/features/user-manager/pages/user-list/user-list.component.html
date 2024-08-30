@@ -1,0 +1,172 @@
+<!-- botonera -->
+<div id="container" class="hstack gap-2 bento-box">
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="arrowleft"
+      type="normal"
+      routerLink=""
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      icon="check"
+      type="default"
+      text="Detail"
+      [routerLink]="['details', selectedRowId]"
+      [disabled]="isDisabled"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      icon="add"
+      type="success"
+      text="Create"
+      routerLink="add"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      icon="edit"
+      type="normal"
+      text="Update"
+      [routerLink]="['update', selectedRowId]"
+      [disabled]="isDisabled"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      icon="remove"
+      type="danger"
+      text="Delete"
+      [disabled]="isDisabled"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal"
+    >
+    </dx-button>
+  </div>
+  
+  <div class="ms-auto">
+    <dx-button
+      style="border: none;"
+      icon="refresh"
+      type="normal"
+      (onClick)="getDataFromServer()"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="menu"
+      type="normal"
+      data-bs-toggle="dropdown" 
+      aria-expanded="false"
+    >
+    </dx-button>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="#"><i class="dx-icon-export dx-icon-custom-action-bar"></i> Exportar</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#"><i class="dx-icon-print dx-icon-custom-action-bar"></i> Imprimir</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#"><i class="dx-icon-email dx-icon-custom-action-bar"></i> Enviar Correo</a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<!-- botonera END -->
+
+<div class="bento-box">
+  <h2>User List</h2>
+  <h4>Lista de usuarios del sistema</h4>
+  
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="store"
+    [showBorders]="true"
+    [remoteOperations]="true"
+    [allowColumnResizing]="true"
+    (onSelectionChanged)="onSelectionChanged($event)"
+    #dataGridRef
+  >
+    <dxo-search-panel
+      [visible]="true"
+      [width]="240"
+      placeholder="Search..."
+    >
+    </dxo-search-panel>
+
+    <dxo-selection mode="single"></dxo-selection>
+  
+    <!-- configuracion de columnas -->
+    <dxi-column dataField="userName" dataType="string"> </dxi-column>
+
+    <dxi-column caption="full name">
+      <dxi-column dataField="firstName" dataType="string"> </dxi-column>
+      <dxi-column dataField="lastName" dataType="string"> </dxi-column>
+    </dxi-column>
+
+    <dxi-column dataField="email" dataType="string"> </dxi-column>
+    <dxi-column dataField="isEmailVerified" dataType="boolean"> </dxi-column>
+    <dxi-column dataField="isBlocked" dataType="boolean"> </dxi-column>
+    <dxi-column dataField="isEnabled" dataType="boolean"> </dxi-column>
+    <!-- configuracion de columnas END -->
+  
+    <!-- paginame -->
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[10, 20, 50]"
+    ></dxo-pager>
+    <!-- paginame END -->
+
+    <!-- sumarizame.. pero sin querer.. -->
+    <dxo-summary>
+      <dxi-total-item column="userName" summaryType="count"></dxi-total-item>
+      <dxi-total-item column="email" summaryType="min"></dxi-total-item>
+    </dxo-summary>
+
+  </dx-data-grid>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        Are you sure you want to delete this record?
+      </div>
+      <div class="modal-footer border-0 d-flex justify-content-center">
+        <dx-button
+          stylingMode="text"
+          text="YES"
+          type="default"
+          data-bs-dismiss="modal"
+          (onClick)="delete()"
+        >
+        </dx-button>
+        <dx-button
+          stylingMode="text"
+          text="NO"
+          type="danger"
+          data-bs-dismiss="modal"
+        >
+        </dx-button>
+      </div>
+    </div>
+  </div>
+</div>

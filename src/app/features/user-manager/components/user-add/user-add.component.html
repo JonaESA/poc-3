@@ -1,0 +1,70 @@
+<!-- botonera -->
+<div class="hstack gap-2 bento-box">
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="arrowleft"
+      type="normal"
+      routerLink="/user"
+    >
+    </dx-button>
+  </div>
+  
+  <div class="ms-auto">
+    <dx-button
+      style="border: none;"
+      icon="refresh"
+      type="normal"
+    >
+    </dx-button>
+  </div>
+  
+  <div>
+    <dx-button
+      style="border: none;"
+      icon="menu"
+      type="normal"
+    >
+    </dx-button>
+  </div>
+</div>
+<!-- botonera END -->
+
+<div class="bento-box">
+  <h2 class="mb-3">Crear usuario</h2>
+  <form (submit)="handleSubmit($event)">
+    <dx-form 
+      [formData]="user"
+      [colCount]="2"
+    >
+      <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
+      <dxi-item dataField="firstName"></dxi-item>
+      <dxi-item dataField="lastName"></dxi-item>
+
+      <dxi-item dataField="email" [isRequired]="true">
+        <dxi-validation-rule type="email" message="No soy un email..."></dxi-validation-rule>
+      </dxi-item>
+  
+      <dxi-item
+        dataField="isBlocked"
+        editorType="dxCheckBox"
+      >
+      </dxi-item>
+  
+      <dxi-item
+        dataField="isEnabled"
+        editorType="dxCheckBox"
+      >
+      </dxi-item>
+  
+      <!-- submit button! -->
+      <dxi-item
+        itemType="button"
+        [buttonOptions]="submitButtonOptions"
+        horizontalAlignment="left"
+      >
+      </dxi-item>
+    
+    </dx-form>
+  </form>
+</div>
